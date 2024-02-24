@@ -1,18 +1,28 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 [Serializable]
 public class CurrencyDataEntity : IUserDataEntity
 {
-    public long money;
+    public long score;
 }
 
 [Serializable]
-public class UserCurrencyData : UserDataBase<CurrencyDataEntity>, IMainData
+public class UserScoreData : UserDataBase<CurrencyDataEntity>, IGlobalData, IChapterData
 {
-    public long Money => entity.money;
+    #region Getter
+    
+    [JsonIgnore]
+    public long Score => entity.score;
+    
+    #endregion
 
-    public void EarnMoney(long amount)
+    #region Actions
+    
+    public void AddScore(long amount)
     {
-        entity.money += amount;
+        entity.score += amount;
     }
+    
+    #endregion
 }
